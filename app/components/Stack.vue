@@ -1,7 +1,7 @@
 <template>
   <section id="stack">
     <div class="section-header stack-header">
-      <span class="section-meta">[03 / capability]</span>
+      <span class="section-meta">[04 / capability]</span>
       <h2 class="section-title">Tech Stack</h2>
     </div>
 

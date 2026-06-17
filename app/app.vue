@@ -48,6 +48,7 @@
           <nav class="desktop-nav">
             <a href="#works" class="nav-link" @click.prevent="scrollToSection('works')">Works</a>
             <a href="#about" class="nav-link" @click.prevent="scrollToSection('about')">About</a>
+            <a href="#experience" class="nav-link" @click.prevent="scrollToSection('experience')">Experience</a>
             <a href="#stack" class="nav-link" @click.prevent="scrollToSection('stack')">Stack</a>
             <a href="#contact" class="nav-link" @click.prevent="scrollToSection('contact')">Contact</a>
           </nav>
@@ -65,6 +66,7 @@
         <nav class="mobile-nav">
           <a href="#works" class="mobile-nav-link" @click.prevent="scrollToSection('works')">Works</a>
           <a href="#about" class="mobile-nav-link" @click.prevent="scrollToSection('about')">About</a>
+          <a href="#experience" class="mobile-nav-link" @click.prevent="scrollToSection('experience')">Experience</a>
           <a href="#stack" class="mobile-nav-link" @click.prevent="scrollToSection('stack')">Stack</a>
           <a href="#contact" class="mobile-nav-link" @click.prevent="scrollToSection('contact')">Contact</a>
         </nav>
@@ -75,6 +77,7 @@
         <Hero :active="heroActive" />
         <Works />
         <About />
+        <Experience />
         <Stack />
         <Contact />
       </main>

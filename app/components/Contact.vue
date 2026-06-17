@@ -1,7 +1,7 @@
 <template>
   <section id="contact">
     <div class="section-header contact-header">
-      <span class="section-meta">[04 / connection]</span>
+      <span class="section-meta">[05 / connection]</span>
     </div>
 
     <div class="contact-content">

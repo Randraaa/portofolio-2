@@ -2,18 +2,34 @@
   <section id="works">
     <div class="section-header works-header">
       <div class="header-left">
-        <span class="section-meta">[01 / works]</span>
-        <h2 class="section-title">Selected Works</h2>
+        <span class="section-meta">[01 / portfolio]</span>
+        <h2 class="section-title">My Portfolio</h2>
+        <div class="portfolio-tabs">
+          <button 
+            class="tab-btn" 
+            :class="{ active: activeTab === 'projects' }" 
+            @click="switchTab('projects')"
+          >
+            Projects
+          </button>
+          <button 
+            class="tab-btn" 
+            :class="{ active: activeTab === 'certificates' }" 
+            @click="switchTab('certificates')"
+          >
+            Certificates
+          </button>
+        </div>
       </div>
       
       <!-- Slider Navigation Controls -->
       <div class="carousel-nav">
-        <button class="nav-btn prev" @click="scroll('prev')" aria-label="Previous Project">
+        <button class="nav-btn prev" @click="scroll('prev')" :aria-label="activeTab === 'projects' ? 'Previous Project' : 'Previous Certificate'">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
         </button>
-        <button class="nav-btn next" @click="scroll('next')" aria-label="Next Project">
+        <button class="nav-btn next" @click="scroll('next')" :aria-label="activeTab === 'projects' ? 'Next Project' : 'Next Certificate'">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
@@ -30,38 +46,75 @@
       @mousemove="onDrag"
     >
       <div class="carousel-track" ref="carouselTrack" @scroll="updateProgress">
-        <div 
-          v-for="project in projects" 
-          :key="project.num" 
-          class="project-card"
-        >
-          <!-- Project Preview Image -->
-          <div class="project-preview">
-            <img :src="project.image" :alt="project.title" class="preview-img" loading="lazy" />
-            <div class="preview-overlay">
-              <a :href="project.demoUrl" target="_blank" rel="noopener" class="preview-btn">View Site ↗</a>
+        <!-- Projects View -->
+        <template v-if="activeTab === 'projects'">
+          <div 
+            v-for="project in projects" 
+            :key="project.num" 
+            class="project-card"
+          >
+            <!-- Project Preview Image -->
+            <div class="project-preview">
+              <img :src="project.image" :alt="project.title" class="preview-img" loading="lazy" />
+              <div class="preview-overlay">
+                <a :href="project.demoUrl" target="_blank" rel="noopener" class="preview-btn">View Site ↗</a>
+              </div>
             </div>
-          </div>
 
-          <div class="project-details">
-            <div class="card-top">
-              <div class="project-num">{{ project.num }}</div>
-              <span class="project-category">{{ project.category }}</span>
-            </div>
-            
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-desc">{{ project.desc }}</p>
-            
-            <div class="project-tech">
-              <span v-for="t in project.tech" :key="t" class="tech-pill">{{ t }}</span>
-            </div>
-            
-            <div class="project-links">
-              <a :href="project.demoUrl" class="btn-link" target="_blank" rel="noopener">Live Demo ↗</a>
-              <a :href="project.githubUrl" class="btn-link" target="_blank" rel="noopener">GitHub ↗</a>
+            <div class="project-details">
+              <div class="card-top">
+                <div class="project-num">{{ project.num }}</div>
+                <span class="project-category">{{ project.category }}</span>
+              </div>
+              
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-desc">{{ project.desc }}</p>
+              
+              <div class="project-tech">
+                <span v-for="t in project.tech" :key="t" class="tech-pill">{{ t }}</span>
+              </div>
+              
+              <div class="project-links">
+                <a :href="project.demoUrl" class="btn-link" target="_blank" rel="noopener">Live Demo ↗</a>
+                <a :href="project.githubUrl" class="btn-link" target="_blank" rel="noopener">GitHub ↗</a>
+              </div>
             </div>
           </div>
-        </div>
+        </template>
+
+        <!-- Certificates View -->
+        <template v-else>
+          <div 
+            v-for="cert in certificates" 
+            :key="cert.num" 
+            class="project-card cert-card"
+          >
+            <!-- Cert Preview Image -->
+            <div class="project-preview">
+              <img :src="cert.image" :alt="cert.title" class="preview-img" loading="lazy" />
+              <div class="preview-overlay">
+                <a :href="cert.verifyUrl" target="_blank" rel="noopener" class="preview-btn">Verify Credential ↗</a>
+              </div>
+            </div>
+
+            <div class="project-details">
+              <div class="card-top">
+                <div class="project-num">{{ cert.num }}</div>
+                <span class="project-category">{{ cert.category }}</span>
+              </div>
+              
+              <h3 class="project-title">{{ cert.title }}</h3>
+              <p class="project-desc cert-desc">
+                Issued by: <strong>{{ cert.issuer }}</strong><br />
+                Date: {{ cert.date }}
+              </p>
+              
+              <div class="project-links">
+                <a :href="cert.verifyUrl" class="btn-link" target="_blank" rel="noopener">Verify Credential ↗</a>
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
 
@@ -89,6 +142,18 @@ interface Project {
   demoUrl: string
   githubUrl: string
 }
+
+interface Certificate {
+  num: string
+  category: string
+  title: string
+  issuer: string
+  date: string
+  image: string
+  verifyUrl: string
+}
+
+const activeTab = ref<'projects' | 'certificates'>('projects')
 
 const projects = ref<Project[]>([
   {
@@ -140,6 +205,64 @@ const projects = ref<Project[]>([
     image: '/fintech_preview.png',
     demoUrl: 'https://github.com/Randraaa',
     githubUrl: 'https://github.com/Randraaa'
+  },
+  {
+    num: '06',
+    category: 'Web App',
+    title: 'CineMate',
+    desc: 'Platform pemesanan tiket bioskop online dengan visual seat map interaktif (VIP, Regular, Ekonomi), kode promo dinamis, pembuatan e-receipt, dan dashboard admin untuk verifikasi pemesanan & pemeliharaan kursi.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
+    image: '/cinemate_preview.jpg',
+    demoUrl: 'https://cinemate-nu-gules.vercel.app/',
+    githubUrl: 'https://github.com/Randraaa'
+  }
+])
+
+const certificates = ref<Certificate[]>([
+  {
+    num: '01',
+    category: 'AI & Creative Technology',
+    title: 'Peserta - Roadshow Nextgen Tech Series (Almazing: Creative Content with AI)',
+    issuer: 'Indigo & ITB STIKOM Bali',
+    date: '22 Oktober 2025',
+    image: '/Nextgen_Tech_Series_Almazing_Creative_Content_AI_Raffy.png',
+    verifyUrl: '/Nextgen_Tech_Series_Almazing_Creative_Content_AI_Raffy.pdf'
+  },
+  {
+    num: '02',
+    category: 'Full Stack Development',
+    title: 'Full Stack Web Developer Certificate',
+    issuer: 'Dicoding Academy',
+    date: 'Desember 2025',
+    image: '/certificate_preview.jpg',
+    verifyUrl: 'https://www.dicoding.com/'
+  },
+  {
+    num: '03',
+    category: 'Front-End Development',
+    title: 'React & Front-End Specialist',
+    issuer: 'Coursera / Meta',
+    date: 'Oktober 2025',
+    image: '/certificate_preview.jpg',
+    verifyUrl: 'https://www.coursera.org/'
+  },
+  {
+    num: '04',
+    category: 'Back-End Development',
+    title: 'Node.js & Database Architecture',
+    issuer: 'Udemy / Zero To Mastery',
+    date: 'Agustus 2025',
+    image: '/certificate_preview.jpg',
+    verifyUrl: 'https://www.udemy.com/'
+  },
+  {
+    num: '05',
+    category: 'Responsive Web Design',
+    title: 'Responsive Web Design & Layouts',
+    issuer: 'freeCodeCamp',
+    date: 'Juni 2025',
+    image: '/certificate_preview.jpg',
+    verifyUrl: 'https://www.freecodecamp.org/'
   }
 ])
 
@@ -197,6 +320,34 @@ const updateProgress = () => {
   }
 }
 
+const switchTab = (tab: 'projects' | 'certificates') => {
+  if (activeTab.value === tab) return
+
+  gsap.to(carouselTrack.value, {
+    opacity: 0,
+    y: 15,
+    duration: 0.35,
+    ease: 'power2.out',
+    onComplete: () => {
+      activeTab.value = tab
+      if (carouselTrack.value) {
+        carouselTrack.value.scrollLeft = 0
+      }
+      scrollProgress.value = 0
+
+      gsap.to(carouselTrack.value, {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        ease: 'power2.out',
+        onComplete: () => {
+          updateProgress()
+        }
+      })
+    }
+  })
+}
+
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger)
   
@@ -234,6 +385,52 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+.portfolio-tabs {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: $text-secondary;
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: $text-primary;
+  }
+
+  &.active {
+    background-color: $accent-color;
+    border-color: $accent-color;
+    color: #0d0b09;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  }
+}
+
+.cert-desc {
+  font-family: $font-body;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: $text-secondary;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+
+  strong {
+    color: $text-primary;
+  }
+}
+
 .works-header {
   display: flex;
   justify-content: space-between;
