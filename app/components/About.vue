@@ -24,11 +24,13 @@
       <!-- Bio Text & Highlights -->
       <!-- EDIT: Detail Biografi & Statistik -->
       <div class="bio-container">
-        <p class="bio-lead">Saya Muhammad Raffy Andra Hadyan, seorang Fullstack Web Developer yang berbasis di Denpasar, Bali, Indonesia.</p>
+        <p class="bio-lead">I'm Muhammad Raffy Andra Hadyan, a Fullstack Web Developer based in Denpasar, Bali, Indonesia, and an incoming Data Science student at Western Sydney University.</p>
         <p class="bio-text">
-          Saya berdedikasi membangun aplikasi web modern yang cepat, andal, mudah diskalakan, dan berorientasi penuh pada pengguna. 
-          Melalui penulisan kode yang bersih (clean code) dan arsitektur yang kuat, saya menjembatani visual antarmuka yang elegan 
-          dengan logika server yang tangguh. Saya senang mengeksplorasi teknologi baru dan menyelesaikan masalah rekayasa perangkat lunak yang kompleks.
+          I am dedicated to building fast, reliable, scalable, and user-centric modern web applications. 
+          By writing clean code and designing solid architectures, I bridge elegant user interfaces 
+          with powerful backend logic. Currently, I am expanding my horizons into Data Science at 
+          Western Sydney University to combine software engineering with advanced analytics, aiming 
+          to solve complex software and data problems.
         </p>
 
         <!-- Highlights cards -->
