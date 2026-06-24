@@ -263,6 +263,42 @@ const certificates = ref<Certificate[]>([
     date: 'Juni 2025',
     image: '/certificate_preview.jpg',
     verifyUrl: 'https://www.freecodecamp.org/'
+  },
+  {
+    num: '06',
+    category: 'Software Testing',
+    title: 'Webinar Dasar-Dasar Pengujian Perangkat Lunak',
+    issuer: 'Growia Academy',
+    date: 'Agustus 2024',
+    image: '/Growia_Software_Tester_Muhammad_Raffy_Andra_Hadyan.png',
+    verifyUrl: '/Growia_Software_Tester_Muhammad_Raffy_Andra_Hadyan.pdf'
+  },
+  {
+    num: '07',
+    category: 'English Language',
+    title: 'Peserta - Bahasa Inggris (OSN-HK 2024)',
+    issuer: 'Prestige Olimpiade',
+    date: 'Agustus 2024',
+    image: '/Piagam_Bahasa_Inggris_OSN_HK_2024.png',
+    verifyUrl: '/Piagam_Bahasa_Inggris_OSN_HK_2024.pdf'
+  },
+  {
+    num: '08',
+    category: 'Computer Science',
+    title: 'Peserta - Informatika (OSN-HK 2024)',
+    issuer: 'Prestige Olimpiade',
+    date: 'Agustus 2024',
+    image: '/Piagam_Informatika_OSN_HK_2024.png',
+    verifyUrl: '/Piagam_Informatika_OSN_HK_2024.pdf'
+  },
+  {
+    num: '09',
+    category: 'Software Engineering',
+    title: 'Peserta - Pengembangan Perangkat Lunak dan Gim (OKN 2024)',
+    issuer: 'Olimpiade Kejuruan Nasional',
+    date: '2024',
+    image: '/Piagam_PPLG_OKN_2024.png',
+    verifyUrl: '/Piagam_PPLG_OKN_2024.pdf'
   }
 ])
 
